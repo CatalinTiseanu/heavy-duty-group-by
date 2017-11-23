@@ -5,17 +5,19 @@ I wanted to build a production-grade algorithmic component of a real distributed
 I took me roughly 10 hours to implement this in Feburary 2016.
 I used Python 2 back then, I updated the code to Python 3.
 
-The task was to build a function which can group a set of key-value's:
+The task was to build a function which can group a large stream of key-value pairs:
 
 ```def groupBy(input: Iterator[(K, V)]) -> Iterator[(K, List[V])]```
 
 For example, for the stream (1, 3), (4, 1), (1, 2), (4, 4), (100, 1) it should produce an iterator over
 `[(1, [3, 2]), (4, [1, 4]), (1, [100])]`
 
+Now assume the above stream could have billions of (key, value) pairs :)
+
 The requirements were:
 * Function should work even if the total size of the input exceeds the size of the memory. (I assumed constant key and value size)
-* Performance should degrade gracefully as the problem size varies. (if the input can fit easily into memory, don't use disk)
-* Algorithm should not exceed O(n log n) average case performance for n input key-value pairs
+* Performance should degrade gracefully as the problem size varies. (If the input can fit easily into memory, don't use disk)
+* Algorithm should not exceed O(N log N) average case performance for N input key-value pairs
 * Code shoudl be thread-safe
 
 ## Algorithm
@@ -44,27 +46,28 @@ Total memory consumption: `O(max(max_hashmap_entries, max_num_files) * kv_size)`
 Total disk space consumption: (N * kv_size) . 
 
 Total execution time (including full iteration over the result):  
-* `O(N log(N)` if the stream fits in memory (N <= max_hashmap_entries) . 
+* `O(N log N)` if the stream fits in memory (N <= max_hashmap_entries) . 
 Else if the stream doesn't fit in memory: 
-* `O(N log(N)` if the stream fits in memory (N <= max_hashmap_entries) . 
+* `O(N log N)` if the stream fits in memory (N <= max_hashmap_entries) . 
 * `O(N log(max_hashmap_entries))` for chunking the stream into hashmaps stored on disk . 
-* `O(N log(N)` if the stream fits in memory (N <= max_hashmap_entries) . 
+* `O(N log N)` if the stream fits in memory (N <= max_hashmap_entries) . 
 * `O(N log_in_base_(max_num_files)_of(N / max_hashmap_entries))` for merging the dump files until at most
-* `O(N log(N)` if the stream fits in memory (N <= max_hashmap_entries) . 
-        max_num_files remain . 
+* `O(N log N)` if the stream fits in memory (N <= max_hashmap_entries) . 
+   max_num_files remain . 
 * `O(N log (max_num_files))` for iterating over the result . 
-* `O(N log(N)` if the stream fits in memory (N <= max_hashmap_entries) . 
+* `O(N log N)` if the stream fits in memory (N <= max_hashmap_entries) . 
 In total:  
-    * `O(N * (log(max_hashmap_entries) + log_in_base_(max_num_files)_of(N / max_hashmap_entries) +
-                      log (max_num_files)))` . 
+    * `O(N * (log(max_hashmap_entries) + log_in_base_(max_num_files)_of(N / max_hashmap_entries) + log (max_num_files)))` . 
 
 ## How to test
 
 
 Tests are found in the test/ folder.  
-To run tests install nose with ./install.sh . 
+To run tests install nose with ./install.sh
+
 To run unit tests and doc tests run ./run_tests.sh
 
 ## Todo
+
 
 Use more of the Pyton3 language features (such as hinting).  
