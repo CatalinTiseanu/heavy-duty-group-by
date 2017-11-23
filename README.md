@@ -7,7 +7,7 @@ I used Python 2 back then, I updated the code to Python 3.
 
 The task was to build a function which can group a set of key-value's:
 
-def groupBy(input: Iterator[(K, V)]): Iterator[(K, List[V])]
+def groupBy(input: Iterator[(K, V)]) -> Iterator[(K, List[V])] . 
 For example, for the stream (1, 3), (4, 1), (1, 2), (4, 4), (100, 1) it should produce an iterator over
 `[(1, [3, 2]), (4, [1, 4]), (1, [100])]`
 
@@ -63,3 +63,7 @@ In total:
 Tests are found in the test/ folder.  
 To run tests install nose with ./install.sh . 
 To run unit tests and doc tests run ./run_tests.sh
+
+## Todo
+
+Use more of the Pyton3 language features (such as hinting).  
