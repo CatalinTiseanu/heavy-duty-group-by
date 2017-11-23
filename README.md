@@ -1,5 +1,5 @@
 ## Description
-==============
+
 
 The task was to build a function which can group a set of key-value:
 
@@ -12,7 +12,7 @@ The requirements were:
 * Code shoudl be thread-safe
 
 ## Algorithm
-============
+
 
 First, create a temporary folder associated with the request, which will hold all dump files.
 
@@ -29,7 +29,7 @@ the resulting hashmap.
 (same as in Stage 2). Finally, once the KeyListIteratorFromDisk iterator has been exhausted, remove the associated temporary folder.  
 
 ## Time and memory complexity:
-==============================
+
 
 Let kv_size equal the size in memory of a single (key, value) entry.  
 Let N equal the total number of (key, value) entries in the input.  
@@ -52,7 +52,7 @@ In total:
                       log (max_num_files)))` . 
 
 ## How to test
-==============
+
 
 Tests are found in the test/ folder.  
 To run tests install nose with ./install.sh . 
