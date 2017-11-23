@@ -1,9 +1,15 @@
+
 ## Description
 
+I wanted to build a production-grade algorithmic component of a real distributed system.
+I took me roughly 10 hours to implement this in Feburary 2016.
+I used Python 2 back then, I updated the code to Python 3.
 
-The task was to build a function which can group a set of key-value:
+The task was to build a function which can group a set of key-value's:
 
 def groupBy(input: Iterator[(K, V)]): Iterator[(K, List[V])]
+For example, for the stream (1, 3), (4, 1), (1, 2), (4, 4), (100, 1) it should produce an iterator over
+`[(1, [3, 2]), (4, [1, 4]), (1, [100])]`
 
 The requirements were:
 * Function should work even if the total size of the input exceeds the size of the memory. (I assumed constant key and value size)
