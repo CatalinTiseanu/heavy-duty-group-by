@@ -53,6 +53,7 @@ In total:
 
 ## How to test
 ==============
-Tests are found in the test/ folder.   
+
+Tests are found in the test/ folder.  
 To run tests install nose with ./install.sh . 
 To run unit tests and doc tests run ./run_tests.sh
