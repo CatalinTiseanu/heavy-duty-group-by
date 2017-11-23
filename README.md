@@ -1,5 +1,5 @@
-Description
-=================
+## Description
+==============
 
 The task was to build a function which can group a set of key-value:
 
@@ -11,8 +11,9 @@ The requirements were:
 * Algorithm should not exceed O(n log n) average case performance for n input key-value pairs
 * Code shoudl be thread-safe
 
-Algorithms
-=================
+## Algorithms
+=============
+
 First, create a temporary folder associated with the request, which will hold all dump files.
 
 1) Stage 1: Go through the input maintaining a hashmap of the form key -> list(values)
@@ -42,7 +43,9 @@ Total execution time (including full iteration over the result):
 In total:
     * O(N * (log(max_hashmap_entries) + log_in_base_(max_num_files)_of(N / max_hashmap_entries) +
                       log (max_num_files)))
-How to test
-=================
+
+## How to test
+==============
+
 To run tests install nose with ./install.sh
 To run unit tests and doc tests run ./run_tests.sh
