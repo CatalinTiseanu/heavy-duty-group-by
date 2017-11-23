@@ -33,22 +33,22 @@ the resulting hashmap.
 
 Let kv_size equal the size in memory of a single (key, value) entry.  
 Let N equal the total number of (key, value) entries in the input.  
-Total memory consumption: O(max(max_hashmap_entries, max_num_files) * kv_size) . 
+Total memory consumption: `O(max(max_hashmap_entries, max_num_files) * kv_size)` . 
 Total disk space consumption: (N * kv_size) . 
 Total execution time (including full iteration over the result):  
-    * O(N log(N) if the stream fits in memory (N <= max_hashmap_entries) . 
-    else . 
-    * O(N log(N) if the stream fits in memory (N <= max_hashmap_entries) . 
-    * O(N log(max_hashmap_entries)) for chunking the stream into hashmaps stored on disk . 
-    * O(N log(N) if the stream fits in memory (N <= max_hashmap_entries) . 
-    * O(N log_in_base_(max_num_files)_of(N / max_hashmap_entries)) for merging the dump files until at most
-    * O(N log(N) if the stream fits in memory (N <= max_hashmap_entries) . 
+    * `O(N log(N)` if the stream fits in memory (N <= max_hashmap_entries) . 
+    else if the stream doesn't fit in memory: 
+    * `O(N log(N)` if the stream fits in memory (N <= max_hashmap_entries) . 
+    * `O(N log(max_hashmap_entries))` for chunking the stream into hashmaps stored on disk . 
+    * `O(N log(N)` if the stream fits in memory (N <= max_hashmap_entries) . 
+    * `O(N log_in_base_(max_num_files)_of(N / max_hashmap_entries))` for merging the dump files until at most
+    * `O(N log(N)` if the stream fits in memory (N <= max_hashmap_entries) . 
         max_num_files remain . 
-    * O(N log (max_num_files)) for iterating over the result . 
-    * O(N log(N) if the stream fits in memory (N <= max_hashmap_entries) . 
+    * `O(N log (max_num_files))` for iterating over the result . 
+    * `O(N log(N)` if the stream fits in memory (N <= max_hashmap_entries) . 
 In total:  
-    * O(N * (log(max_hashmap_entries) + log_in_base_(max_num_files)_of(N / max_hashmap_entries) +
-                      log (max_num_files))) . 
+    * `O(N * (log(max_hashmap_entries) + log_in_base_(max_num_files)_of(N / max_hashmap_entries) +
+                      log (max_num_files)))` . 
 
 ## How to test
 ==============
