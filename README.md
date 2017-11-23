@@ -7,7 +7,8 @@ I used Python 2 back then, I updated the code to Python 3.
 
 The task was to build a function which can group a set of key-value's:
 
-def groupBy(input: Iterator[(K, V)]) -> Iterator[(K, List[V])] . 
+```def groupBy(input: Iterator[(K, V)]) -> Iterator[(K, List[V])]```
+
 For example, for the stream (1, 3), (4, 1), (1, 2), (4, 4), (100, 1) it should produce an iterator over
 `[(1, [3, 2]), (4, [1, 4]), (1, [100])]`
 
