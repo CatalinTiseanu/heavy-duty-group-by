@@ -1,9 +1,10 @@
+# GroupBy iterator for large key-value streams
 
 ## Description
 
 I wanted to build a production-grade algorithmic component of a real distributed system.
-I took me roughly 10 hours to implement this in Feburary 2016.
-I used Python 2 back then, I updated the code to Python 3.
+It took roughly 8 hours to implement this back in Feburary 2016.
+I used Python 2 back then, I updated the code to Python 3 using `2to3`.
 
 The task was to build a function which can group a large stream of key-value pairs:
 
@@ -13,12 +14,13 @@ For example, for the stream (1, 3), (4, 1), (1, 2), (4, 4), (100, 1) it should p
 `[(1, [3, 2]), (4, [1, 4]), (1, [100])]`
 
 Now assume the above stream could have billions of (key, value) pairs :)
+In case the output doesn't fit in memory, it should be stored on disk and gracefully deleted once the whole iterator has beene exhausted.
 
 The requirements were:
 * Function should work even if the total size of the input exceeds the size of the memory. (I assumed constant key and value size)
 * Performance should degrade gracefully as the problem size varies. (If the input can fit easily into memory, don't use disk)
 * Algorithm should not exceed O(N log N) average case performance for N input key-value pairs
-* Code shoudl be thread-safe
+* Code should be thread-safe
 
 ## Algorithm
 
